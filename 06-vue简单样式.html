@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<style>
+    .red {
+        color: red;
+    }
+    .size {
+        font-size: 20px;
+    }
+    .back {
+        background-color: green;
+    }
+</style>
+<body>
+
+    <div id="app">
+        <!-- 1.行内样式,直接使用style指定样式,和传统html一样,vue不建议写行间样式,会打破MVVM的思想,耦合性变高 -->
+        <div style="color: red;">我是第1个div</div>
+        <!-- 2.用class,id指定,在style中编写样式,推荐 -->
+        <div class="red">我是第2个div</div>
+        <!-- 3.使用v-bind指定一个数组,数组是class数组 -->
+        <div :class="['red','size']">我是第3个div</div>
+        <!-- 4.使用三元运算符(表达式) -->
+        <div :class="flag?'size':'red'">我是第4个div</div>
+        <!-- 5.使用对象来代替三元表达式,提高代码可读性 -->
+        <div :class="{'red':true}">我是第5个div</div>
+        <!-- 6.通过绑定data中数据来控制style -->
+        <div :class="classObj">我是第6个div</div>
+        
+        <!-- 2和6 使用的最多 2就是最经典的css写法,耦合性也很低;6是基于vue的v-bind的写法,可以动态的改变样式 -->
+
+        <button @click="changeStyle">改变样式</button>
+
+    </div>
+
+    <script>
+        var vue = new Vue({
+          el: '#app',   
+          data: {       
+            flag: true,
+            classObj: {'red':true, 'size':true, 'back':true}
+          },
+          methods: {
+            changeStyle() {
+                this.classObj.red = !this.classObj.red
+            }
+          }
+        })
+    </script>    
+</body>
+</html>

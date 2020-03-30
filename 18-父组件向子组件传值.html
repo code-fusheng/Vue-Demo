@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <!-- 父组件向子组件传值  属性名称也需要用横杠 - -->
+        <my-component :parent-msg="msg"></my-component>
+    </div>
+
+    <template id="temp1">
+        <div>
+            <div>{{title}}</div>
+            <!-- 经过测试, 子组件无法直接访问到父组件中的data -->
+            <!-- <div>{{msg}}</div> -->
+            <div>{{parentMsg}}</div>
+            <button @click="changeMsg">修改</button>
+        </div>
+    </template>
+
+    <script>
+
+        var vue = new Vue({
+          el: '#app', 
+          data: {       
+            msg: 'I am father component msg'
+          },
+          components: {
+              'my-component': {
+                  template: '#temp1',
+                  data() {
+                      return {
+                          title: 'I am a title'
+                      }
+                  },
+                  methods: {
+                      changeMsg() {
+                          this.parentMsg = '我被修改了'
+                      }
+                  },
+                // props 中的数据,都是通过父组件传递到子组件的
+                // props 中的数据都是只读的,无法去赋值
+                // props 使用数组是非常不标准的写法,并给每一个prop声明类型和默认值
+                  props: {
+                    parentMsg: {
+                        type: String,
+                        default: null
+                    }
+                  }    
+              }
+          }
+        })
+    </script>    
+</body>
+</html>

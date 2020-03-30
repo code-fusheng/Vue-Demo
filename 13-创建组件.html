@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <my-component1></my-component1>
+        <my-component2></my-component2>
+        <my-component3></my-component3>
+        <my-component4></my-component4>
+    </div>
+
+    <template id="temp4">
+        <div>
+            <div>code-fusheng</div>
+            <p>code-fusheng</p>
+            <h1>code-fusheng</h1>
+        </div>
+    </template>
+    
+    <script>
+
+        var num= 123
+         
+        // 1 use vue.extend new Component
+        // 按照 java 的开发思想，变量名往往是驼峰规则，而vue定义组件时可以使用驼峰规则，
+        // 但是，使用组件时如果存在驼峰，应当全部小写，并且将每个单词用横杠-隔开
+        Vue.component('myComponent1', Vue.extend({
+            template: '<h3>This is use extend new Component</h3>'   // template 就是组件要展示的内容，可以是html内容
+        }))
+
+        // 2.不使用 extend 方法创建组件
+        Vue.component('myComponent2', {
+            template: '<h4>Not use extend new a Component</h4>'
+        })
+
+        // 不论使用哪种方式去创建组件,组件的template属性只能有一个 ,并且有且只能有一个根节点.
+        // ES6语法: 反引号 ` ES6中用来解决字符串拼接的新引号.在两个引号之间可以写任何内容,不需要使用 + 拼接
+        Vue.component('myComponent3', {
+            template: `<div><h4>Not use extend new a Component</h4><h4>
+                      `+num+`
+                      Not use extend new a Component</h4>
+                      ${num}
+                      </div>
+                      `
+        })
+
+        // 3.使用template 
+        Vue.component('myComponent4', {
+            template: '#temp4'
+        })
+
+
+        var vue = new Vue({
+          el: '#app',
+          // data model  
+          data: {       
+           
+          },
+          // methods
+          methods: {
+            
+          },
+          // 过滤器
+          filters: {
+
+          }
+        })
+    </script>    
+</body>
+</html>

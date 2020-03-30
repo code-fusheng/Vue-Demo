@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="./lib/vue-2.4.0.js"></script>
+  <script src="./lib/vue-router-3.0.1.js"></script>
+</head>
+<style>
+  /* v-enter 这是个时间点，是进入之前，元素的起始状态，此时还没有进入 */
+  /* v-leave-to 这是个时间点，是动画离开之后，元素的终止状态，此时，元素 动画已经结束了 */
+  .component-enter,
+  .component-leave-to {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+
+  /* v-enter-active 入场动画的时间段 */
+  /* v-leave-active 离场动画的时间段 */
+  .component-enter-active,
+  .component-leave-active {
+    transition: all 0.5s ease;
+  }
+</style>
+
+<body>
+  <!-- 
+    以往的非前后端分离项目，如果需要根据id获取某条数据，在另一个页面去展示？
+      页面A点击，传递id给后端，后端查出，转发到页面B，页面B展示。
+    前后端分离项目？
+      页面A点击，传递id给页面B，页面B 在created中根据id将数据查出，接着，在页面B展示。
+   -->
+  <div id="app">
+    <!-- 只需要在url后面用?去传参即可，不需要对路由进行任何修改 -->
+    <router-link to="/login?id=123&name=张三" tag="button">登录</router-link>
+    <router-link to="/register/12312/李四">注册</router-link>
+
+    <transition name="component" mode="out-in">
+      <router-view></router-view>
+    </transition>
+
+  </div>
+
+  <script>
+    var login = {
+      template: '<p>我是登录组件 --- {{$route.query.id}} --- {{$route.query.name}}</p>',
+      created() {
+        // this.$route获取路由对象
+        // route.query只适用于 ？ 后面拼接的参数
+        console.log(this.$route.query.id, this.$route.query.name)
+      }
+    }
+    var register = {
+      template: '<p>我是注册组件 --- {{$route.params.id}} --- {{$route.params.name}}</p>',
+      created() {
+        // this.$route获取路由对象
+        console.log(this.$route.params.id, this.$route.params.name)
+      }
+    }
+
+    let routerObj = new VueRouter({
+      routes: [
+        {path: '/login', component: login},
+        {path: '/register/:id/:name', component: register}
+      ]
+    })
+
+    var vue = new Vue({
+      el: '#app',
+      data: {
+      },
+      router: routerObj
+    })
+
+  </script>
+
+</body>
+
+</html>

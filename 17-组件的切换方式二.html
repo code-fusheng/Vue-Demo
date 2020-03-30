@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<style>
+    .component-enter,
+    .component-leave-to {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    .component-enter-active,
+    .component-leave-active {
+        transition: all 0.8s ease;
+    }
+</style>
+<body>
+
+    <div id="app1">
+        <button @click="componentName='login'">登录</button>
+        <button @click="componentName='register'">注册</button>
+
+        <!-- 
+            transition 提供了 mode 属性,设置组件切换时的模式
+            vue 提供了 component, 来展示对应名称的组件,这是个占位符,使用:is来指定要展示的组件
+        -->
+        <transition name="component" mode="out-in">
+            <component :is="componentName"></component>
+        </transition>
+
+    </div>
+
+    
+    <script>
+
+        Vue.component('login', {
+            template: '<p>我是登录组件</p>'
+        })
+        Vue.component('register', {
+            template: '<p>我是注册组件</p>'
+        })
+
+        var vue = new Vue({
+          el: '#app1',
+          // 数据模型   
+          data: {       
+             componentName: 'login'
+          },
+          // 方法
+          methods: {
+            
+          }
+        })
+    </script>    
+</body>
+</html>

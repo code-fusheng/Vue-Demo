@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <title>v-text,v-html,v-clock 指令</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<style>
+    [v-clock]{
+        display: none;   
+    }
+</style>
+<body>
+
+    <div id="app">
+        <div>{{msg1}} 你好</div>
+        <!-- v-text 指令:会覆盖元素文本内容,而元素占位符(插值表达式)只会替换自己这个占位符,不会把整个元素清空-->
+        <div v-text="msg2">你好</div>
+        <!-- v-html 指令:将data数据以html标签去展示-->
+        <div v-html="msg3"></div>
+        <!-- v-clock 指令:当直接使用占位符时,会有占位符一闪而过的现象 -->
+    </div>
+    
+    <script>
+        
+        var vue = new Vue({
+          el: '#app',   
+          data: {       
+            msg1: 'code-fusheng',
+            msg2: 'hello vue',
+            msg3: '<h1>this is v-html</h1>'
+          }
+        })
+    
+      </script>
+    
+</body>
+</html>

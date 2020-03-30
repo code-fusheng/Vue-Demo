@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <title>v-model双向绑定</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<body>
+
+    <div id="app">
+
+        <h1>{{msg}}</h1>
+        <!-- 
+            v-model 指令可以实现表单元素和model中的数据双向绑定,其中一方被修改时,另一方会同步展示
+            PS : v-model 只能用于表单元素中,当model中的元素被修改时,v-bind绑定的位置实时修改,
+                 v-bind 绑定的元素修改时,model数据并不会被修改 
+            v-model 双向绑定 v-bing 单向绑定
+         -->
+        <input type="text" name="" id="" v-model="msg">
+
+        <button @click="changeMsg">点击</button>
+
+        <input type="text" name="" id="" :value="msg">
+
+        <button @click="changeMsg">点击</button>
+
+    </div>
+    <script>
+        
+        var vue = new Vue({
+          el: '#app',   
+          data: {       
+            msg: 'this is a button'
+          },
+          methods: {
+              changeMsg() {
+                  this.changeMsg2()
+              },
+              changeMsg2() {
+                    this.msg = '我现在不是按钮了'
+              }
+          }
+        })
+    
+      </script>
+    
+</body>
+</html>

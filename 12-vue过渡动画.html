@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+
+<style>
+    /* v-enter 这是一个时间点, 是进入之前, 元素的起始状态, 此时还没有进入 */
+    /* v-leave-to 这个是时间点, 是动画离开之后, 元素的终止状态, 此时,元素,动画已经结束 */
+    .div1-enter,
+    .div1-leave-to {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    /* v-enter-active 入场动画的时间段 */
+    /* v-leave-active 离场动画的时间段 */
+    .div1-enter-active,
+    .div1-leave-active {
+        transition: all 0.8s ease;
+    }
+
+    .div2-enter,
+    .div2-leave-to {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    .div2-enter-active,
+    .div2-leave-active {
+        transition: all 0.2s ease;
+    }
+</style>
+
+
+<body>
+
+    <div id="app">
+
+        <button @click="flag=!flag">click it !</button>
+
+        <transition name="div1">
+            <div v-show="flag">this is a div</div>
+        </transition>
+
+        <button @click="flag=!flag">click it !</button>
+
+        <transition name="div2">
+            <div v-show="flag">this is a div</div>
+        </transition>
+        
+    </div>
+    <script>
+        var vue = new Vue({
+          el: '#app',
+          // 数据模型   
+          data: {       
+            flag: false
+          },
+          // 方法
+          methods: {
+            
+          },
+          // 过滤器
+          filters: {
+
+          }
+        })
+    </script>    
+</body>
+</html>

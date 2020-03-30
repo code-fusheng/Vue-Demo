@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <title>v-bind, v-click 指令</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <!-- 
+            v-bind: 字面意思是绑定,是vue中提供的用户绑定属性的指令, 可以缩写成: 
+            v-bind 可以出现在任何地方,每个html标签都有一个属性,直接写属性时,传入的是文本
+            加上 v-bind 时,使用的是 vue 实例中的 data
+        -->
+        <button v-bind:title="msg">this is button</button>
+        <button :title="msg">this is button</button>
+    
+
+        <button onclick="alert('点一下玩一年,装备不花一分钱')">传奇</button>
+        <!-- 
+            v-on: vue提供的事件绑定指令 可以简写成 @
+        -->
+        <button v-on:click="show()">贪玩蓝月</button>
+        <button @click="show()">是兄弟就来砍我</button>
+    </div>
+    <script>
+        
+        var vue = new Vue({
+          el: '#app',   
+          data: {       
+            msg: 'this is a button'
+          },
+          methods: {
+            show() {
+                alert('点一下玩一年,装备不花一分钱')
+            }
+          }
+        })
+    
+      </script>
+    
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<body>
+
+    <div id="app1">
+        <button @click="flag=true">登录</button>
+        <button @click="flag=false">注册</button>
+        <!-- 
+            方式一: 使用 v-if v-else-if v-else 去切换组件 适合组件较少的情况.
+         -->
+        <login v-if="flag"></login>
+        <register v-else></register>
+    </div>
+
+    <script>
+
+        Vue.component('login', {
+            template: '<p>我是登录组件</p>'
+        })
+        Vue.component('register', {
+            template: '<p>我是注册组件</p>'
+        })
+
+        var vue = new Vue({
+          el: '#app1',
+          // 数据模型   
+          data: {       
+             flag: true
+          },
+          // 方法
+          methods: {
+            
+          }
+        })
+    </script>    
+</body>
+</html>

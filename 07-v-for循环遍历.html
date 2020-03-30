@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <!-- 
+            v-for 是 vue 中的遍历循环的指令
+            (item, index) in data, 其中 item 是遍历的每一项名称, index 是每一项的索引
+         -->
+        <p v-for="(item, index) in simpleList">索引值:{{index}}------数据:{{item}}</p>
+
+        <p v-for="(obj, index) in objectList">索引值:{{index}}------id:{{obj.id}}------name:{{obj.name}}</p>
+
+        <div>
+            <input type="text" v-model="id"></input>
+            <input type="text" v-model="name"></input>
+            <button @click="add">添加</button>
+        </div>
+
+        <!-- key 是在 v-for 中的唯一标识,在任何的 v-for 中都建议加上 key -->
+        <p v-for="(item, index) in objectList" :key="index">
+            <input type="checkbox" name="" id="">{{item.id}}---{{item.name}}
+        </p>
+
+    </div>
+    <script>
+        var vue = new Vue({
+          el: '#app',   
+          data: {       
+            simpleList: [1,2,3,4,5,6,7],
+            objectList: [
+                {id: 1, name: 'zhangsan'},
+                {id: 2, name: 'lisi'},
+                {id: 3, name: 'wangwu'},
+                {id: 4, name: 'maliu'},
+                {id: 5, name: 'zhouqi'},
+                {id: 6, name: 'chengpa'}
+            ]
+          },
+          methods: {
+            add() {
+                const obj = {id: this.id, name: this.name}
+                this.objectList.unshift(obj)
+                // this.objectList.push(obj) 追加到最后
+            }
+          }
+        })
+    </script>    
+</body>
+</html>

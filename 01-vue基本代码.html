@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie-edge">
+  <title>Document</title>
+  <!-- 1.导入vue包 -->
+  <script src="./lib/vue-2.4.0.js"></script>
+</head>
+<body>
+
+  <div id="app">
+    {{msg}} {{name}}
+  </div>
+
+  <script>
+    // 2.到日vue的包之后,在浏览器内存中,我们就多了一个vue的构造函数(入口函数:框架必备)
+
+    var vue = new Vue({
+      el: '#app',   // el 表示vue这个实例,在页面上控制的区域
+      data: {       // data 是 MVVM 中的M ,专门存放数据
+        msg: 'hello vue',
+        name: 'code-fusheng'
+      }
+    })
+
+  </script>
+  
+</body>
+</html>
